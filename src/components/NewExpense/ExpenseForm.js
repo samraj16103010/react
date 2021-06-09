@@ -1,9 +1,14 @@
 import React,{useState} from 'react';
 import './ExpenseForm.css'
 const ExpenseForm = (props) => {
+    const [flag,setFlag] = useState(false);
     const [enteredTitle,setEnteredTitle] = useState('');
     const [enteredExpense,setEnteredExpense] = useState();
     const [enteredDate,setEnteredDate] = useState('');
+
+    const handleExpenseForm = () => {
+        setFlag(!flag);
+    }
 
     const titleHandler = (event) => {
          setEnteredTitle(event.target.value);
@@ -28,12 +33,15 @@ const ExpenseForm = (props) => {
 
         console.log('Entered Data',enteredData);
         props.onSaveData(enteredData);
+        setFlag(!flag);
         setEnteredTitle('');
         setEnteredExpense('');
         setEnteredDate('');
     }
 
-   return <form onSubmit = {submitHandler}>
+   return (
+       <div>
+       {flag && <form onSubmit = {submitHandler}>
        <div className = "new-expense__controls">
            <div className = "new-expense__control">
                <label>Title</label>
@@ -50,8 +58,12 @@ const ExpenseForm = (props) => {
        </div>
        <div className = "new-expense__actions">
            <button type = "submit">Add Expense</button>
+           <button onClick = {() => {setFlag(!flag)}} >Cancel</button>
        </div>
-   </form>
+   </form>}
+   {!flag && <button className = "new-expense__actions" onClick = {handleExpenseForm}>Add New Expense</button>}
+   </div>
+   )
 }
 
 export default ExpenseForm;

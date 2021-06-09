@@ -4,7 +4,8 @@ import Card from '../UI/Card'
 import { useState } from 'react';
 function ExpenseItem(props){
     return(
-        <Card className = "expense-item">
+        <li>
+          <Card className = "expense-item">
           <div>
             <ExpenseDate date = {props.date}/>
           </div>
@@ -13,6 +14,7 @@ function ExpenseItem(props){
             <div className = "expense-item__price">${props.amount}</div>
           </div>
         </Card>
+        </li>
 
     );
 }
