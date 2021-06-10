@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import './ExpenseForm.css'
 const ExpenseForm = (props) => {
+    var minYear = new Date(new Date().getFullYear()-2,0,2).toISOString().slice(0,10);
+    var maxYear = new Date(new Date().getFullYear()+2,12,1).toISOString().slice(0,10);
+    //alert(maxYear);
     const [flag,setFlag] = useState(false);
     const [enteredTitle,setEnteredTitle] = useState('');
     const [enteredExpense,setEnteredExpense] = useState();
@@ -27,7 +30,7 @@ const ExpenseForm = (props) => {
 
         const enteredData = {
             title:enteredTitle,
-            amount:enteredExpense,
+            amount:+enteredExpense,
             date:new Date(enteredDate)
         };
 
@@ -53,7 +56,7 @@ const ExpenseForm = (props) => {
            </div>
            <div className = "new-expense__control">
                <label>Date</label>
-               <input type = "date" min = "2019-01-01" max = "2022-12-31" value = {enteredDate} onChange = {dateHandler}></input>
+               <input type = "date" min = {minYear} max = {maxYear} value = {enteredDate} onChange = {dateHandler}></input>
            </div>
        </div>
        <div className = "new-expense__actions">

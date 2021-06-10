@@ -9,13 +9,13 @@ import ExpensesList from'./ExpensesList';
 import ExpensesChart from './ExpensesChart';
 function Expenses(props){
   console.log('Updated Props',props);
-  const [year,setYear] = useState('2020');
+  const [year,setYear] = useState(new Date().getFullYear());
   const onSaveFilter = (filterYear) => {
     setYear(filterYear);
   }
 
 const filteredExpenses = props.expenses.filter(expense => {
-  return expense.date.getFullYear().toString() === year;
+  return expense.date.getFullYear().toString() === year.toString();
 });
 
   return(
